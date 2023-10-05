@@ -1,0 +1,58 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f0f0f0;
+}
+
+#mensajeTurno {
+    margin: 20px 0;
+    font-size: 24px;
+}
+
+button {
+    width: 80px;
+    height: 80px;
+    font-size: 24px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #eee;
+}
+
+table {
+    margin: 0 auto;
+    border-collapse: collapse;
+}
+
+td {
+    padding: 0;
+    text-align: center;
+}
+
+/* Estilos para los botones de Jugador 1 y Jugador 2 */
+#jugador1,
+#jugador2 {
+    font-size: 18px;
+    margin: 10px;
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+#jugador1:hover,
+#jugador2:hover {
+    background-color: #2980b9;
+}
+
+/* Estilos para el mensaje de ganador */
+#mensajeGanador {
+    font-size: 24px;
+    font-weight: bold;
+    color: #27ae60;
+    margin: 20px 0;
+}
