@@ -1,21 +1,29 @@
 body {
     font-family: Arial, sans-serif;
     text-align: center;
-    background-color: #f0f0f0;
+    background-color: #B7E4C7;
+    margin: 0;
+    padding: 0;
 }
 
 #mensajeTurno {
     margin: 20px 0;
     font-size: 24px;
+    font-family: 'VT323', monospace;
 }
-
+h1{
+    font-family: 'Press Start 2P', sans-serif;
+}
 button {
-    width: 80px;
-    height: 80px;
+    width: 100px;
+    height: 100px;
     font-size: 24px;
     border: 1px solid #ccc;
     background-color: #fff;
     cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    margin: 10px;
+    text-align: center;
 }
 
 button:hover {
@@ -25,6 +33,7 @@ button:hover {
 table {
     margin: 0 auto;
     border-collapse: collapse;
+    margin-top: 20px;
 }
 
 td {
@@ -32,27 +41,42 @@ td {
     text-align: center;
 }
 
-/* Estilos para los botones de Jugador 1 y Jugador 2 */
 #jugador1,
 #jugador2 {
     font-size: 18px;
     margin: 10px;
     padding: 10px 20px;
-    background-color: #3498db;
-    color: #fff;
-    border: none;
+    background-color: #FFD700; /* Color dorado */
+    color: #000; /* Texto en negro */
+    border: 2px solid #000; /* Borde negro sólido */
+    border-radius: 100px; /* Esquinas más redondeadas */
     cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
 }
 
 #jugador1:hover,
 #jugador2:hover {
-    background-color: #2980b9;
+    background-color: #FFA500; /* Color dorado más claro al pasar el mouse */
 }
-
-/* Estilos para el mensaje de ganador */
 #mensajeGanador {
     font-size: 24px;
     font-weight: bold;
     color: #27ae60;
     margin: 20px 0;
+}
+
+#reset {
+    width: 100px;
+    height: 40px;
+    font-size: 18px;
+    background-color: #e74c3c; /* Rojo */
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    margin-top: 20px;
+    border-radius: 50px;
+}
+
+#reset:hover {
+    background-color: #c0392b; /* Rojo más oscuro al pasar el mouse */
 }

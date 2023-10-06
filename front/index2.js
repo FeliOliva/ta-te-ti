@@ -29,6 +29,36 @@ const botones = [
     btnCelda9
 ];
 
+function resetear() {
+    fetch(`http://localhost:3000/resetear`, {
+        method: "POST"
+    })
+    .then((response) => {
+        if (!response.ok) {
+            throw Error(response.status);
+        }
+        return response.json(); 
+    })
+    .then((data) => {
+        valorRelleno = "";
+        jugador1Button.disabled = false;
+        jugador2Button.disabled = false;
+        mensajeTurno.textContent = 'Selecciona un jugador';
+        numeroJugador = 0;
+        turnoJugador = 0;
+        juegoTerminado = false;
+
+        botones.forEach(boton => {
+            boton.innerHTML = "";
+            boton.disabled = false;
+        });
+    })
+    .catch((error) => {
+        console.error("Error al resetear el juego:", error);
+    });
+}
+
+
 function seleccionarJugador(jugador) {
     if (jugador == 'jugador 1') {
         valorRelleno = "X";
@@ -123,6 +153,29 @@ function cargarStatus() {
         .then((data) => {
             console.log(data);
             turnoJugador = data.turnodel === 'jugador 1' ? 1 : 2;
+            
+            if (numeroJugador === turnoJugador) {
+                mensajeTurno.innerHTML = `Tu turno`;
+                habilitarBotones();
+            } else {
+                mensajeTurno.innerHTML = `Turno del jugador ${turnoJugador}`;
+                deshabilitarBotones();
+            }
+            
+            for (let i = 0; i < botones.length; i++) {
+                const boton = botones[i];
+                
+                if (data.progresoPlayer1.includes(i)) {
+                    boton.innerHTML = "X";
+                    boton.disabled = true;
+                } else if (data.progresoPlayer2.includes(i)) {
+                    boton.innerHTML = "O";
+                    boton.disabled = true;
+                } else {
+                    boton.innerHTML = "";
+                    boton.disabled = false;
+                }
+            }
             const combinacionesGanadoras = [
                 [0, 1, 2], [3, 4, 5], [6, 7, 8], 
                 [0, 3, 6], [1, 4, 7], [2, 5, 8], 
@@ -130,7 +183,7 @@ function cargarStatus() {
             ];
             for (const combinacion of combinacionesGanadoras) {
                 const [a, b, c] = combinacion;
-
+    
                 if (
                     data.progresoPlayer1.includes(a) &&
                     data.progresoPlayer1.includes(b) &&
@@ -141,7 +194,7 @@ function cargarStatus() {
                     deshabilitarBotones();
                     return;
                 }
-
+    
                 if (
                     data.progresoPlayer2.includes(a) &&
                     data.progresoPlayer2.includes(b) &&
@@ -153,35 +206,12 @@ function cargarStatus() {
                     return;
                 }
             }
-
+    
             if (data.progresoPlayer1.length + data.progresoPlayer2.length === 9) {
                 mensajeTurno.textContent = '¡Es un empate!';
                 juegoTerminado = true;
                 deshabilitarBotones();
                 return;
-            }
-
-            if (numeroJugador === turnoJugador) {
-                mensajeTurno.innerHTML = `Tu turno`;
-                habilitarBotones();
-            } else {
-                mensajeTurno.innerHTML = `Turno del jugador ${turnoJugador}`;
-                deshabilitarBotones();
-            }
-
-            for (let i = 0; i < botones.length; i++) {
-                const boton = botones[i];
-
-                if (data.progresoPlayer1.includes(i)) {
-                    boton.innerHTML = "X";
-                    boton.disabled = true;
-                } else if (data.progresoPlayer2.includes(i)) {
-                    boton.innerHTML = "O";
-                    boton.disabled = true;
-                } else {
-                    boton.innerHTML = "";
-                    boton.disabled = false;
-                }
             }
         })
         .catch((error) => {

@@ -49,7 +49,15 @@ app.get("/obtenerstatus", (req, res) => {
     res.json(estadoJuego);
 });
 
+app.post("/resetear", (req, res) => {
+    estadoJuego.progresoPlayer1 = [];
+    estadoJuego.progresoPlayer2 = [];
+    estadoJuego.turnodel = "jugador 1";
 
+    res.json({
+        mensajeservidor: "Juego reiniciado",
+    });
+});
 
 
 app.listen(3000, () => {
